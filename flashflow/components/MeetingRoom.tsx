@@ -20,8 +20,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { LayoutList, Loader, Users } from "lucide-react";
+import { LayoutList, Users } from "lucide-react";
 import EndCallButton from "./EndCallButton";
+import Loader from "./Loader";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
@@ -48,8 +49,9 @@ const MeetingRoom = () => {
         return <SpeakerLayout participantsBarPosition="right" />;
     }
   };
-  
+
   if (callingState !== CallingState.JOINED) return <Loader />;
+  
   return (
     <section className="relative h-screen w-full overflow-hidden pt-4 text-white">
 
