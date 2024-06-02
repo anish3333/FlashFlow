@@ -46,10 +46,10 @@ const MeetingModal = ({
             onClick={handleClick}
           >
             {buttonIcon && (
-              <Image src={buttonIcon} alt="buttonIcon" width={72} height={72} />
+              <Image src={buttonIcon} alt="buttonIcon" width={13} height={13} />
             )}
             &nbsp;
-            {buttonText || "Default Text"}
+            {buttonText || "Create Meeting"}
           </Button>
         </div>
       </DialogContent>
