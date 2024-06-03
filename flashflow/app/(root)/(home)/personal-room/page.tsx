@@ -39,10 +39,10 @@ const PersonalRoom = () => {
 
   const startRoom = async () => {
     if (!client || !user) return;
-
-    const newCall = client.call("default", meetingId!);
-
-    if (!call) {
+    
+    // if there does not exist any call where (call id == user id) then create a new call
+    if (!call) { 
+      const newCall = client.call("default", meetingId!);
       await newCall.getOrCreate({
         data: {
           starts_at: new Date().toISOString(),

@@ -63,8 +63,8 @@ const CallList = ({ type }: { type: "ended" | "upcoming" | "recordings" }) => {
   const calls = getCalls();
   const noCallsMessage = getNoCallsMessage();
 
-  if(type === 'recordings') console.log(recordings) 
-  else console.log(calls);
+  // if(type === 'recordings') console.log(recordings) 
+  // else console.log(calls);
 
   if(isLoading) return <Loader />
   return (
@@ -72,7 +72,7 @@ const CallList = ({ type }: { type: "ended" | "upcoming" | "recordings" }) => {
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
           <MeetingCard
-            key={(meeting as Call).id}
+            key={(meeting as Call).id || crypto.randomUUID()}
             icon={
               type === "ended"
                 ? "/icons/previous.svg"

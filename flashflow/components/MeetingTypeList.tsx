@@ -10,6 +10,7 @@ import { useUser } from "@clerk/nextjs";
 import { useToast } from "./ui/use-toast";
 import { Textarea } from "./ui/textarea";
 import DatePicker from "react-datepicker";
+import { Input } from "./ui/input";
 
 const MeetingTypeList = () => {
   const { toast } = useToast();
@@ -154,6 +155,22 @@ const MeetingTypeList = () => {
         className="text-center"
         buttonText="Start Meeting"
       />
+
+
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Join a Meeting"
+        handleClick={() => router.push(values.link)}
+        className="text-center"
+        buttonText="Start Meeting"
+      >
+        <Input
+          placeholder="Meeting Link"
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          onChange={(e) => setValues({...values, link: e.target.value})}
+        />
+      </MeetingModal> 
     </section>
   );
 };
