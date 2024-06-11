@@ -12,28 +12,33 @@ const Home = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (upcomingCalls.length > 0 && upcomingCalls[0]?.state?.startsAt) {
-        const startsAt = new Date(upcomingCalls[0].state.startsAt);
-        
-        const istStartsAtTime = startsAt.toLocaleTimeString("en-US", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
+      if (!isLoading && upcomingCalls && upcomingCalls.length > 0) {
+        const latestCall = upcomingCalls[upcomingCalls.length - 1];
+        if (latestCall.state && latestCall.state.startsAt) {
+          const startsAt = new Date(latestCall.state.startsAt);
 
-        const istStartsAtDate = new Intl.DateTimeFormat("en-US", {
-          timeZone: "Asia/Kolkata",
-          dateStyle: "full",
-        }).format(startsAt);
+          const istStartsAtTime = startsAt.toLocaleTimeString("en-US", {
+            timeZone: "Asia/Kolkata",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
 
-        setUpcomingMeetingDateTime(`${istStartsAtDate} at ${istStartsAtTime}`);
+          const istStartsAtDate = new Intl.DateTimeFormat("en-US", {
+            timeZone: "Asia/Kolkata",
+            dateStyle: "full",
+          }).format(startsAt);
+
+          setUpcomingMeetingDateTime(`${istStartsAtDate} at ${istStartsAtTime}`);
+        } else {
+          setUpcomingMeetingDateTime("");
+        }
       } else {
         setUpcomingMeetingDateTime("");
       }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [upcomingCalls]);
+  }, [upcomingCalls, isLoading]);
 
   // Format time in IST
   const time = now.toLocaleTimeString("en-US", {
